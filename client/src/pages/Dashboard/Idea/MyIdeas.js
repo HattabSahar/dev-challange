@@ -1,7 +1,34 @@
 import { useQuery } from 'react-query'
 import axios from 'axios'
-import { DislikeOutlined, LikeOutlined, LoadingOutlined } from '@ant-design/icons'
+import { DislikeFilled, LikeFilled, LoadingOutlined } from '@ant-design/icons'
 import { Link } from 'react-router-dom'
+
+function MyIdeaReactions({ id }) {
+  const { isLoading, data = {} } = useQuery(`get-idea-${id}-reactions`, () =>
+    axios.get(`/post/${id}/reaction`).then(res => res.data)
+  )
+
+  console.log(data)
+  if (isLoading)
+    return (
+      <td className='d-flex' style={{ gap: 12 }}>
+        <LoadingOutlined />
+      </td>
+    )
+
+  const { up, down } = data
+
+  return (
+    <td className='d-flex' style={{ gap: 12 }}>
+      <span className=' text-success d-flex align-items-center' style={{ gap: 4 }}>
+        {up} <LikeFilled />
+      </span>
+      <span className='text-danger d-flex align-items-center' style={{ gap: 4 }}>
+        {down} <DislikeFilled />
+      </span>
+    </td>
+  )
+}
 
 function MyIdeas() {
   const { isLoading, isFetching, data } = useQuery('get-my-ideas', () =>
@@ -40,14 +67,7 @@ function MyIdeas() {
                 <td>
                   <Link to={`/discussion/${_id}`}>{title}</Link>
                 </td>
-                <td className='d-flex' style={{ gap: 12 }}>
-                  <span className='d-flex align-items-center' style={{ gap: 4 }}>
-                    0 <LikeOutlined />
-                  </span>
-                  <span className='d-flex align-items-center' style={{ gap: 4 }}>
-                    0 <DislikeOutlined />
-                  </span>
-                </td>
+                <MyIdeaReactions id={_id} />
                 <td>{comments.length}</td>
                 <td>{new Date(createdAt).toLocaleString()}</td>
               </tr>

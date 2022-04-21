@@ -3,6 +3,7 @@ const { isAuth, canBeAuth } = require('../middleware/isAuth')
 const router = express.Router()
 const Post = require('../models/Post')
 const Reaction = require('../models/Reaction')
+
 router.post('/', isAuth, async (req, res) => {
   const { title, description } = req.body
 
