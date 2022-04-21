@@ -35,7 +35,12 @@ router.get('/my', isAuth, (req, res) => {
 router.get('/:id', async (req, res) => {
   const id = req.params.id
   try {
-    const post = await Post.findOne({ _id: id }).populate('author')
+    const post = await Post.findOne({ _id: id })
+      .populate('author')
+      .populate({
+        path: 'comments',
+        populate: { path: 'author' },
+      })
     res.send(post)
   } catch (e) {
     res.status(404).send()
