@@ -1,12 +1,13 @@
 import { Route, Routes } from 'react-router-dom'
 import CommingSoon from './CommingSoon'
 import Home from './Home'
+import Idea from './Idea'
 
 function HomePage() {
   return (
     <Routes>
       <Route index element={<Home />}></Route>
-      <Route path='ideas' element={<CommingSoon />}></Route>
+      <Route path='ideas' element={<Idea />}></Route>
       <Route path='discussion' element={<CommingSoon />}></Route>
       <Route path='project' element={<CommingSoon />}></Route>
       <Route path='supervision' element={<CommingSoon />}></Route>

@@ -1,20 +1,31 @@
+import { Field, Form, Formik } from 'formik'
+import axios from 'axios'
 function CreateIdea() {
+  const onSubmit = values => axios.post('/post', values)
   return (
-    <div className='mt-3'>
-      <h1>Submit new idea</h1>
-      <div class='form-group my-3'>
-        <input class='form-control' placeholder='Title' />
-      </div>
-      <div class='form-group my-3'>
-        <textarea class='form-control' rows='7'></textarea>
-      </div>
-      <div class='form-group'>
-        <input type='file' class='form-control-file' id='exampleFormControlFile1' />
-      </div>
-      <div className='d-flex'>
-        <button className='ms-auto btn my-3 btn-primary'>Submit</button>
-      </div>
-    </div>
+    <Formik onSubmit={onSubmit} initialValues={{ title: '', description: '' }}>
+      <Form>
+        <div className='mt-3'>
+          <h1>Submit new idea</h1>
+          <div class='form-group my-3'>
+            <Field name='title' class='form-control' placeholder='Title'></Field>
+          </div>
+          <div class='form-group my-3'>
+            <Field
+              name='description'
+              as='textarea'
+              class='form-control'
+              rows='7'
+              placeholder='description'
+            ></Field>
+          </div>
+
+          <div className='d-flex my-3'>
+            <button className='px-5 ms-auto btn btn-primary'>Submit</button>
+          </div>
+        </div>
+      </Form>
+    </Formik>
   )
 }
 

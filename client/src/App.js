@@ -1,12 +1,11 @@
 import { Routes, Route } from 'react-router-dom'
+import HomePage from './pages/Dashboard'
 import LoginPage from './pages/Login'
 function App() {
   return (
     <Routes>
-      <Route path='/'>
-        <Route index element={<h1>Home</h1>} />
-        <Route path='login' element={<LoginPage />} />
-      </Route>
+      <Route path='login' element={<LoginPage />} />
+      <Route path='*' element={<HomePage />} />
     </Routes>
   )
 }
