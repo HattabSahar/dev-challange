@@ -7,7 +7,7 @@ router.post('/', isAuth, async (req, res) => {
   const { title, description } = req.body
 
   if (!title) {
-    res.status(422).send()
+    return res.status(422).send()
   }
 
   const newPost = new Post({
@@ -30,5 +30,31 @@ router.get('/my', isAuth, (req, res) => {
   Post.find({ author: req.user._id })
     .then(posts => res.json(posts))
     .catch(() => res.status(500).send())
+})
+
+router.get('/:id', async (req, res) => {
+  const id = req.params.id
+  try {
+    const post = await Post.findOne({ _id: id }).populate('author')
+    res.send(post)
+  } catch (e) {
+    res.status(404).send()
+  }
+})
+
+router.post('/:id/comment', isAuth, (req, res) => {
+  const { id } = req.params
+  const { comment } = req.body
+  Post.findOne({ _id: id })
+    .then(post => {
+      console.log(post)
+      if (!post) return res.status(403).send()
+      post.comments.push({ comment, author: req.user._id })
+      post
+        .save()
+        .then(() => res.status(201).send())
+        .catch(() => res.status(500).send())
+    })
+    .catch(() => res.status(404).send())
 })
 module.exports = router

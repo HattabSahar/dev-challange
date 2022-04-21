@@ -49,10 +49,7 @@ function MyIdeas() {
                   </span>
                 </td>
                 <td>{comments.length}</td>
-                <td>
-                  {new Date(createdAt).toLocaleTimeString()}{' '}
-                  {new Date(createdAt).toLocaleDateString()}
-                </td>
+                <td>{new Date(createdAt).toLocaleString()}</td>
               </tr>
             )
           })}
