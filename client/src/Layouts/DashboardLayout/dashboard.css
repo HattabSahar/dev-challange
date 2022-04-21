@@ -32,6 +32,13 @@ body {
   }
 }
 
+.hero-container {
+  min-height: calc(100vh - 48px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
 .sidebar-sticky {
   position: relative;
   top: 0;

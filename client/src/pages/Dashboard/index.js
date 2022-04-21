@@ -1,15 +1,15 @@
 import { Route, Routes } from 'react-router-dom'
-import DashboardLayout from '../../Layouts/DashboardLayout'
+import CommingSoon from './CommingSoon'
 
 function HomePage() {
   return (
     <Routes>
-      <Route index element={<DashboardLayout />}></Route>
-      <Route path='ideas' element={<DashboardLayout />}></Route>
-      <Route path='discussion' element={<DashboardLayout />}></Route>
-      <Route path='project' element={<DashboardLayout />}></Route>
-      <Route path='supervision' element={<DashboardLayout />}></Route>
-      <Route path='*' element={<DashboardLayout />}></Route>
+      <Route index element={<CommingSoon />}></Route>
+      <Route path='ideas' element={<CommingSoon />}></Route>
+      <Route path='discussion' element={<CommingSoon />}></Route>
+      <Route path='project' element={<CommingSoon />}></Route>
+      <Route path='supervision' element={<CommingSoon />}></Route>
+      <Route path='*' element={<CommingSoon />}></Route>
     </Routes>
   )
 }
