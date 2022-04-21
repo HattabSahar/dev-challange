@@ -1,14 +1,27 @@
-import express from 'express'
-import mongoose from 'mongoose'
-const { MONGO_DB_URI, PORT } = process.env
-const app = express()
+const express = require('express')
+const mongoose = require('mongoose')
+const cors = require('cors')
 
-mongoose.set('useCreateIndex', true)
-mongoose.connect(MONGO_DB_URI, { useNewUrlParser: true })
-mongoose.connection.once('open', () => {
-  const port = PORT || 8080
-  app.listen({ port }, () => {
-    console.log(`Server running on port ${port}`)
+const server = express()
+const router = require('./routes')
+
+require('dotenv').config()
+
+const port = process.env.PORT || 5000
+const mongoURL = process.env.MONGOURL
+
+mongoose
+  .connect(mongoURL, { useNewUrlParser: true, useUnifiedTopology: true })
+  .then(() => console.log('Connection to Database established successfuly'))
+  .catch(err => {
+    console.log(err)
+    process.abort()
   })
+
+server.use(express.json())
+server.use(cors())
+server.use(router)
+
+server.listen(port, () => {
+  console.log(`Server is running on port http://localhost:${port}`)
 })
-mongoose.connection.on('error', error => console.error(error))
