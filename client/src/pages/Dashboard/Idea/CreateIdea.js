@@ -17,9 +17,10 @@ function CreateIdea() {
             <h1>Submit new idea</h1>
             <div className='form-group my-3'>
               <Field name='title' className='form-control' placeholder='Title'></Field>
-              <small className='ms-2 text-danger'>
-                <ErrorMessage name='title' />
-              </small>
+              <ErrorMessage
+                render={message => <small className='ms-2 text-danger'>{message}</small>}
+                name='title'
+              />
             </div>
             <div className='form-group my-3'>
               <Field
@@ -33,7 +34,11 @@ function CreateIdea() {
             </div>
 
             <div className='d-flex my-3'>
-              <button disabled={isSubmitting} className='px-5 ms-auto btn btn-primary'>
+              <button
+                type='submit'
+                disabled={isSubmitting}
+                className='px-5 ms-auto btn btn-primary'
+              >
                 {isSubmitting ? <LoadingOutlined /> : 'Submit'}
               </button>
             </div>
