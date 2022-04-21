@@ -2,7 +2,6 @@ import style from './style.module.css'
 import classNames from 'classnames'
 
 function AuthLayout({ title, ...props }) {
-  console.log(style)
   return (
     <div className={style.authContainer}>
       <main className={classNames(style.formSignin, 'text-center')}>
