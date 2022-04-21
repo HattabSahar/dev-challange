@@ -1,9 +1,17 @@
 import { Link } from 'react-router-dom'
 import DashboardLayout from '../../Layouts/DashboardLayout'
+import { useUserStore } from '../../store/useUserStore'
 
 function Home() {
+  const { user } = useUserStore()
   return (
     <DashboardLayout isHero>
+      <div className='h4'>
+        Welcome{' '}
+        <span className='text-primary'>
+          {user.firstName} {user.lastName}
+        </span>
+      </div>
       <q className='text-center display-3'>
         Your opinion matters
         <span className='d-block'>&</span>
