@@ -6,7 +6,6 @@ function Comments({ refetch, comments = [], id }) {
     <div className='border-top mt-3 pt-3'>
       <AddComment refetch={refetch} id={id} />
       {comments.map(({ _id, createdAt, comment, author }) => {
-        console.log(comment)
         return (
           <div key={_id} className='card my-3'>
             <div className='card-header d-flex justify-content-between'>

@@ -3,7 +3,6 @@ const { isAuth } = require('../middleware/isAuth')
 const router = express.Router()
 const Post = require('../models/Post')
 router.post('/', isAuth, async (req, res) => {
-  console.log(req.user)
   const { title, description } = req.body
 
   if (!title) {
@@ -52,7 +51,6 @@ router.post('/:id/comment', isAuth, (req, res) => {
   const { comment } = req.body
   Post.findOne({ _id: id })
     .then(post => {
-      console.log(post)
       if (!post) return res.status(403).send()
       post.comments.push({ comment, author: req.user._id })
       post
