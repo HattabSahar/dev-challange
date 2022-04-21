@@ -26,4 +26,9 @@ router.post('/', isAuth, async (req, res) => {
     })
 })
 
+router.get('/my', isAuth, (req, res) => {
+  Post.find({ author: req.user._id })
+    .then(posts => res.json(posts))
+    .catch(() => res.status(500).send())
+})
 module.exports = router

@@ -2,8 +2,16 @@ import Sidebar from './Sidebar'
 import Navbar from './Navbar'
 import './dashboard.css'
 import classNames from 'classnames'
+import { useUserStore } from '../../store/useUserStore'
+import { useEffect } from 'react'
+import { useNavigate } from 'react-router-dom'
 
 function DashboardLayout({ children, isHero = false }) {
+  const navigate = useNavigate()
+  const { user } = useUserStore()
+  useEffect(() => {
+    if (user === null) navigate('/login')
+  }, [user, navigate])
   return (
     <>
       <Navbar />

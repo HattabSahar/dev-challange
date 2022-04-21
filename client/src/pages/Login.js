@@ -2,7 +2,6 @@ import React, { useEffect } from 'react'
 import { Formik, Field, ErrorMessage, Form } from 'formik'
 import validators from '../validators/validators'
 import axios from 'axios'
-// import LoginForm from './LoginForm'
 import AuthLayout from '../Layouts/AuthLayout'
 import { LoadingOutlined } from '@ant-design/icons'
 import { useUserStore } from '../store/useUserStore'
@@ -10,7 +9,6 @@ import { useNavigate } from 'react-router-dom'
 
 const LoginPage = () => {
   const { user, authenticateUser } = useUserStore()
-  console.log(user)
   const navigate = useNavigate()
 
   useEffect(() => {
